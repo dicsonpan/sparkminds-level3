@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeetleBrain · 会思考的甲虫 · 创智实验室 Level 3 实践期</title>
+<style>
+  :root{
+    --paper:#f7f2e9;
+    --card:#fffdf7;
+    --ink:#2b2620;
+    --ink-soft:#5c544a;
+    --line:#d8cdb8;
+    --accent:#a8431c;
+    --teal:#3d5a54;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:17px;line-height:2.0;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:64px 28px 72px;}
+
+  .kicker{
+    font-size:13px;letter-spacing:.32em;color:var(--accent);
+    font-weight:600;margin-bottom:18px;
+  }
+  h1{
+    font-family:"Noto Serif SC","Songti SC",serif;
+    font-weight:700;letter-spacing:.02em;
+    margin-bottom:16px;line-height:1.3;
+  }
+  h1 .en{
+    display:block;font-family:Georgia,"Times New Roman",serif;
+    font-size:50px;font-weight:700;
+  }
+  h1 .cn{
+    display:block;font-size:26px;margin-top:8px;color:var(--accent);
+  }
+  .standfirst{
+    font-size:16px;color:var(--ink-soft);line-height:1.9;
+    border-bottom:3px double var(--line);padding-bottom:28px;margin-bottom:44px;
+  }
+  .standfirst b{color:var(--teal);font-weight:600;}
+
+  p{margin-bottom:22px;}
+  .big{
+    font-family:"Noto Serif SC","Songti SC",serif;
+    font-size:21px;line-height:1.85;font-weight:600;
+  }
+  .hl{background:linear-gradient(transparent 62%,#f5d9a8 62%);padding:0 2px;}
+
+  .divider{
+    text-align:center;color:var(--line);font-size:20px;
+    margin:44px 0;letter-spacing:1.2em;
+  }
+
+  .skill-lines{margin:26px 0 6px;}
+  .skill-lines .row{
+    padding:13px 2px;border-bottom:1px dashed var(--line);
+    font-size:16.5px;
+  }
+  .skill-lines .row:last-child{border-bottom:none;}
+  .skill-lines .term{
+    color:var(--accent);font-weight:700;
+    font-family:"Noto Serif SC","Songti SC",serif;
+  }
+  .skill-punch{
+    font-family:"Noto Serif SC","Songti SC",serif;font-weight:700;font-size:17px;
+    margin-top:18px;
+  }
+
+  .growline{display:flex;flex-wrap:wrap;align-items:center;gap:8px 6px;margin:26px 0 10px;}
+  .growline span{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:4px 16px;font-size:14.5px;font-weight:600;}
+  .growline i{color:var(--accent);font-style:normal;font-weight:700;}
+  .growline span.hot{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+  .stages{margin-top:14px;}
+  .stage{
+    background:var(--card);border:1px solid var(--line);border-radius:8px;
+    padding:22px 26px;margin-bottom:14px;
+  }
+  .stage .no{
+    display:inline-block;font-family:Georgia,serif;font-size:13px;font-weight:700;
+    color:#fff;background:var(--teal);border-radius:3px;padding:1px 9px;
+    margin-right:10px;letter-spacing:.1em;
+  }
+  .stage h3{
+    display:inline;font-family:"Noto Serif SC","Songti SC",serif;
+    font-size:18.5px;font-weight:700;
+  }
+  .stage .rng{font-size:13.5px;color:var(--ink-soft);margin-left:10px;}
+  .stage p{font-size:15.5px;color:var(--ink-soft);margin:8px 0 0;line-height:1.9;}
+
+  .lesson-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;
+  }
+  .lesson{
+    background:var(--card);border:1px solid var(--line);border-radius:6px;
+    padding:14px 16px;font-size:14.5px;line-height:1.75;
+  }
+  .lesson .n{
+    font-family:Georgia,serif;font-weight:700;color:var(--accent);
+    font-size:13px;letter-spacing:.06em;display:block;margin-bottom:2px;
+  }
+  .lesson b{font-weight:700;font-size:15px;}
+  .lesson span{color:var(--ink-soft);display:block;font-size:13.5px;line-height:1.65;}
+  .lesson.proj{background:var(--teal);border-color:var(--teal);}
+  .lesson.proj .n{color:#cfe3de;}
+  .lesson.proj b{color:#fff;}
+  .lesson.proj span{color:#d8e6e2;}
+  .lesson .take{display:block;margin-top:5px;font-size:12.5px;font-weight:700;color:var(--accent);}
+  .lesson.proj .take{color:#f2cdb9;}
+
+  .trio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:22px 0 6px;}
+  .trio .ph{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 16px 14px;position:relative;}
+  .trio .ph .tag{font-size:11px;letter-spacing:.16em;color:var(--ink-soft);font-weight:700;}
+  .trio .ph .en{display:block;font-family:Georgia,serif;font-size:15px;font-weight:700;margin:4px 0 1px;}
+  .trio .ph .cn{display:block;font-family:"Noto Serif SC","Songti SC",serif;font-size:13.5px;color:var(--accent);font-weight:700;margin-bottom:7px;}
+  .trio .ph .d{font-size:12.5px;color:var(--ink-soft);line-height:1.7;display:block;}
+  .trio .ph.now{border:2px solid var(--accent);background:#fbf2e9;}
+  .trio .ph.now::after{content:"本册";position:absolute;top:-10px;right:12px;background:var(--accent);color:#fff;font-size:11px;padding:1px 9px;border-radius:99px;letter-spacing:.1em;}
+  .trio .ph.done::after{content:"已完成";position:absolute;top:-10px;right:12px;background:var(--teal);color:#fff;font-size:11px;padding:1px 9px;border-radius:99px;letter-spacing:.1em;}
+  @media (max-width:560px){.trio{grid-template-columns:1fr;}}
+
+  .info{
+    background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:8px;padding:26px 30px;margin-top:34px;
+  }
+  .info .t{
+    font-family:"Noto Serif SC","Songti SC",serif;font-size:18px;font-weight:700;
+    margin-bottom:14px;
+  }
+  .info .row{
+    display:flex;gap:16px;padding:9px 0;border-bottom:1px dashed var(--line);
+    font-size:15.5px;
+  }
+  .info .row:last-child{border-bottom:none;}
+  .info .k{
+    flex-shrink:0;width:52px;color:var(--teal);font-weight:700;
+  }
+  .info .tel{color:var(--accent);font-weight:700;}
+
+  .finale{
+    margin-top:56px;text-align:center;
+  }
+  .finale .q1{
+    font-family:"Noto Serif SC","Songti SC",serif;
+    font-size:22px;font-weight:700;line-height:2.0;
+  }
+  .finale .q2{
+    font-family:"Noto Serif SC","Songti SC",serif;
+    font-size:26px;font-weight:700;line-height:1.9;margin-top:18px;color:var(--accent);
+  }
+  .sign{
+    text-align:right;margin-top:44px;padding-top:22px;
+    border-top:3px double var(--line);
+    font-size:14.5px;color:var(--ink-soft);
+  }
+  .sign b{color:var(--ink);font-family:"Noto Serif SC","Songti SC",serif;font-size:16px;}
+
+  @media (max-width:560px){
+    .wrap{padding:40px 18px 56px;}
+    h1 .en{font-size:34px;}
+    h1 .cn{font-size:20px;}
+    .lesson-grid{grid-template-columns:1fr;}
+    .finale .q2{font-size:21px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="kicker">创智实验室 · Level 3 实践期 · 三部曲之二</div>
+  <h1><span class="en">BeetleBrain</span><span class="cn">会思考的甲虫</span></h1>
+  <div class="standfirst">
+    Level 3 三部曲 · 第二部 · Mind+ × Arduino 硬件编程课 · <b>15 次课，每次 2 小时</b>。<br>
+    代码第一次离开屏幕，碰到真实世界。<b>每课一个能跑的电子作品，期末整套带回家。</b>
+  </div>
+
+  <p>基础期结课的时候，每个孩子的书桌上都摆了十五件作品。弹簧、彩带、花瓶，每一件都是自己写代码、自己打印出来的。</p>
+  <p>但它们都是静的。摆在桌上，不动，不响，不应人。</p>
+  <p class="big">这个学期，教作品学会两件事：感知，和反应。</p>
+
+  <div class="divider">· · ·</div>
+
+  <p class="big">用两样东西。</p>
+  <p>第一样，Arduino。一块巴掌大的开源电路板，出生在意大利的一间设计学校。当年造它的老师只有一个念头：让学生做出真正能用的东西。今天，全世界的创客、工程师、艺术家都在用它。</p>
+  <p>第二样，Mind+。图形化积木编程。积木还是那套积木思维，从基础期过渡过来，几乎零成本。</p>
+  <p class="big">积木搭好，点一下运行。灯，真的亮了。蜂鸣器，真的响了。舵机，真的转了。</p>
+  <p>代码第一次离开屏幕，碰到真实世界。很多孩子对编程真正的热情，就是从这个瞬间开始的。</p>
+
+  <div class="divider">· · ·</div>
+
+  <p>这个学期，孩子给甲虫装上感官。</p>
+  <p>光敏的眼睛，天一黑，灯自己亮。声音的耳朵，一拍手，装置就答应。超声波的尺子，隔空量出十厘米。再配上会亮的灯、会唱的蜂鸣器、会挥的舵机。</p>
+  <p>这些不是屏幕上的动画。是真实的传感器、真实的电路、真实的反应。</p>
+  <div class="growline">
+    <span>会看</span><i>+</i><span>会听</span><i>+</i><span>会量</span><i>→</i><span class="hot">Arduino 思考</span><i>→</i><span>灯亮</span><i>+</i><span>声响</span><i>+</i><span>动作</span>
+  </div>
+
+  <div class="divider">· · ·</div>
+
+  <p>家长关心的，还是那句话：这门课练什么。</p>
+  <div class="skill-lines">
+    <div class="row">把任何智能设备拆成输入、处理、输出三件事，这是<span class="term">分解</span>。</div>
+    <div class="row">把「天黑了要开灯」写成条件和事件，这是把生活<span class="term">翻译成逻辑</span>。</div>
+    <div class="row">灯不亮，先查代码还是先查线？一段一段试出来，这是<span class="term">调试</span>。</div>
+    <div class="row">同一个传感器，换几块积木就换一种玩法，这是<span class="term">组合</span>。</div>
+  </div>
+  <p class="skill-punch">输入、处理、输出，是所有智能设备的底层。从路口的红绿灯，到会躲人的扫地机器人，再到自动驾驶，都是这三件事：<span class="hl">感知，思考，行动。</span></p>
+
+  <div class="divider">· · ·</div>
+
+  <p class="big">跟基础期一样，每节课都有看得见的产出。</p>
+  <p>每课一个能跑的电子装置：心跳灯、迷你红绿灯、声控灯、倒车雷达……当堂搭好，当堂跑通，当堂演示。程序代码全部归档，存进孩子的作品库。</p>
+  <p>结课时，期末大作品整套带回家：主板、传感器、外壳，还有孩子自己写的程序。它不是教具，是孩子的第一台自己造的智能设备。</p>
+
+  <div class="divider">· · ·</div>
+
+  <p class="big">15 次课，每次 2 小时，一共 30 个小时，四段旅程。</p>
+
+  <div class="stages">
+    <div class="stage">
+      <span class="no">第一段</span><h3>点亮</h3><span class="rng">第 1-4 课</span>
+      <p>从一盏灯开始。闪烁、呼吸、红绿灯、小曲子，和硬件世界的第一句对话。</p>
+    </div>
+    <div class="stage">
+      <span class="no">第二段</span><h3>长出感官</h3><span class="rng">第 5-9 课</span>
+      <p>面包板电路，加上光敏、声音、超声波、温湿度四种传感器。</p>
+    </div>
+    <div class="stage">
+      <span class="no">第三段</span><h3>感知与行动</h3><span class="rng">第 10-11 课</span>
+      <p>舵机让作品动起来。感知、思考、行动，串成一条线。</p>
+    </div>
+    <div class="stage">
+      <span class="no">第四段</span><h3>完整作品</h3><span class="rng">第 12-15 课</span>
+      <p>独立项目从零到一，最后用 3D 打印给作品安一个家。</p>
+    </div>
+  </div>
+
+  <div class="lesson-grid">
+    <div class="lesson"><span class="n">第 1 课</span><b>点亮第一盏灯</b><span>Arduino 通电，第一块积木点亮 LED</span><span class="take">作品：心跳灯</span></div>
+    <div class="lesson"><span class="n">第 2 课</span><b>灯的语言</b><span>闪烁、呼吸，模拟量初体验</span><span class="take">作品：呼吸灯</span></div>
+    <div class="lesson"><span class="n">第 3 课</span><b>甲虫的红绿灯</b><span>多灯加节奏，变量控制时序</span><span class="take">作品：迷你红绿灯</span></div>
+    <div class="lesson"><span class="n">第 4 课</span><b>会唱歌的甲虫</b><span>蜂鸣器加音调，编一段旋律</span><span class="take">作品：小音乐盒</span></div>
+    <div class="lesson"><span class="n">第 5 课</span><b>电流的秘密</b><span>面包板搭电路，串并联初体验</span><span class="take">作品：按钮控制灯</span></div>
+    <div class="lesson"><span class="n">第 6 课</span><b>甲虫的眼睛</b><span>光敏传感器，天黑了灯自己亮</span><span class="take">作品：光感小夜灯</span></div>
+    <div class="lesson"><span class="n">第 7 课</span><b>甲虫的耳朵</b><span>声音传感器，拍手就答应</span><span class="take">作品：声控灯</span></div>
+    <div class="lesson"><span class="n">第 8 课</span><b>甲虫的尺子</b><span>超声波，隔空测出距离</span><span class="take">作品：迷你倒车雷达</span></div>
+    <div class="lesson"><span class="n">第 9 课</span><b>甲虫的温度计</b><span>温湿度传感器，读数显示</span><span class="take">作品：桌面气象站</span></div>
+    <div class="lesson"><span class="n">第 10 课</span><b>会动的甲虫</b><span>舵机与机械结构初体验</span><span class="take">作品：招手小手</span></div>
+    <div class="lesson"><span class="n">第 11 课</span><b>感知与行动</b><span>传感器驱动执行器，条件判断串起来</span><span class="take">作品：自动感应装置</span></div>
+    <div class="lesson"><span class="n">第 12 课</span><b>项目启动</b><span>自选主题，画系统草图</span><span class="take">产出：项目草案</span></div>
+    <div class="lesson"><span class="n">第 13 课</span><b>项目搭建</b><span>电路加程序，跑通第一版</span><span class="take">产出：作品初版</span></div>
+    <div class="lesson"><span class="n">第 14 课</span><b>给作品一个家</b><span>用 3D 打印设计外壳，下一部的预告</span><span class="take">带走：作品加 3D 外壳</span></div>
+    <div class="lesson proj"><span class="n">第 15 课</span><b>成果发布</b><span>演示会，讲自己的设计思路</span><span class="take">带走：期末作品整套</span></div>
+  </div>
+
+  <div class="divider">· · ·</div>
+
+  <p class="big">这门课，是 Level 3 三部曲的第二部。</p>
+  <p>基础期的作品是静的。这一部，它们学会了感知和反应。还差最后一步：把身体和大脑，装进同一个作品。</p>
+  <div class="trio">
+    <div class="ph done">
+      <span class="tag">第一部 · 基础期</span>
+      <span class="en">TurtleFlight</span>
+      <span class="cn">会飞的海龟</span>
+      <span class="d">3D 代码造物。作品从打印机里走出来，每课一件带回家。</span>
+    </div>
+    <div class="ph now">
+      <span class="tag">第二部 · 实践期</span>
+      <span class="en">BeetleBrain</span>
+      <span class="cn">会思考的甲虫</span>
+      <span class="d">Mind+ × Arduino 硬件编程。作品会看、会听、会动。</span>
+    </div>
+    <div class="ph">
+      <span class="tag">第三部 · 进阶期</span>
+      <span class="en">BeetleBot</span>
+      <span class="cn">活过来的甲虫</span>
+      <span class="d">3D 身体 × Arduino 大脑。期末造出自己的智能作品。</span>
+    </div>
+  </div>
+  <p>终章的名字，叫 BeetleBot，活过来的甲虫。</p>
+
+  <div class="info">
+    <div class="t">课程信息</div>
+    <div class="row"><span class="k">课名</span><span>BeetleBrain · 会思考的甲虫（Level 3 实践期 · Mind+ × Arduino 硬件编程课）</span></div>
+    <div class="row"><span class="k">适合</span><span>完成基础期 TurtleFlight 的孩子，或有同等积木编程经验</span></div>
+    <div class="row"><span class="k">课制</span><span>15 次课，每次 2 小时，共 30 小时</span></div>
+    <div class="row"><span class="k">作品</span><span>每课一个能跑的电子装置，期末大作品整套带回家</span></div>
+    <div class="row"><span class="k">设备</span><span>课堂 Arduino 学习套件 + 电脑 + 3D 打印机</span></div>
+    <div class="row"><span class="k">咨询</span><span class="tel">课程顾问 13370001068（微信同号），可约试听</span></div>
+  </div>
+
+  <div class="finale">
+    <div class="q1">基础期，代码有了形状。<br>这一学期，代码有了感官。</div>
+    <div class="q2">当别的孩子还在屏幕里点图标，<br>我们的孩子已经让真实世界听代码的话。</div>
+  </div>
+
+  <div class="sign">
+    <b>潘老师</b> · 创智实验室 SparkMinds
+  </div>
+
+</div>
+</body>
+</html>
