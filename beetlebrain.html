@@ -122,6 +122,9 @@
   .trio .ph.now{border:2px solid var(--accent);background:#fbf2e9;}
   .trio .ph.now::after{content:"本册";position:absolute;top:-10px;right:12px;background:var(--accent);color:#fff;font-size:11px;padding:1px 9px;border-radius:99px;letter-spacing:.1em;}
   .trio .ph.done::after{content:"已完成";position:absolute;top:-10px;right:12px;background:var(--teal);color:#fff;font-size:11px;padding:1px 9px;border-radius:99px;letter-spacing:.1em;}
+  .trio a{display:block;color:inherit;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease;}
+  .trio a:hover{border-color:var(--accent);box-shadow:0 5px 14px rgba(168,67,28,.14);transform:translateY(-3px);}
+  .trio a .cn::after{content:" ›";font-size:12px;color:var(--accent);}
   @media (max-width:560px){.trio{grid-template-columns:1fr;}}
 
   .info{
@@ -263,24 +266,24 @@
   <p class="big">这门课，是 Level 3 三部曲的第二部。</p>
   <p>基础期的作品是静的。这一部，它们学会了感知和反应。还差最后一步：把身体和大脑，装进同一个作品。</p>
   <div class="trio">
-    <div class="ph done">
+    <a class="ph done" href="/">
       <span class="tag">第一部 · 基础期</span>
       <span class="en">TurtleFlight</span>
       <span class="cn">会飞的海龟</span>
       <span class="d">3D 代码造物。作品从打印机里走出来，每课一件带回家。</span>
-    </div>
+    </a>
     <div class="ph now">
       <span class="tag">第二部 · 实践期</span>
       <span class="en">BeetleBrain</span>
       <span class="cn">会思考的甲虫</span>
       <span class="d">Mind+ × Arduino 硬件编程。作品会看、会听、会动。</span>
     </div>
-    <div class="ph">
+    <a class="ph" href="/beetlebot">
       <span class="tag">第三部 · 进阶期</span>
       <span class="en">BeetleBot</span>
       <span class="cn">活过来的甲虫</span>
       <span class="d">3D 身体 × Arduino 大脑。期末造出自己的智能作品。</span>
-    </div>
+    </a>
   </div>
   <p>终章的名字，叫 BeetleBot，活过来的甲虫。</p>
 
